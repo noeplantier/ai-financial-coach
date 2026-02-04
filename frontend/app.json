@@ -1,0 +1,40 @@
+{
+    "expo": {
+      "name": "Financial AI Coach",
+      "slug": "financial-ai-coach",
+      "version": "1.0.0",
+      "orientation": "portrait",
+      "icon": "./assets/images/icon.png",
+      "scheme": "financialcoach",
+      "userInterfaceStyle": "automatic",
+      "splash": {
+        "image": "./assets/images/splash.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#0f0f1e"
+      },
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "ios": {
+        "supportsTablet": true,
+        "bundleIdentifier": "com.financialcoach.app"
+      },
+      "android": {
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/images/adaptive-icon.png",
+          "backgroundColor": "#0f0f1e"
+        },
+        "package": "com.financialcoach.app"
+      },
+      "web": {
+        "favicon": "./assets/images/favicon.png",
+        "bundler": "metro"
+      },
+      "plugins": [
+        "expo-router"
+      ],
+      "experiments": {
+        "typedRoutes": true
+      }
+    }
+  }
