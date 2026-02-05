@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  ScrollView,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
-  FlatList,
   Dimensions,
+  FlatList,
 } from 'react-native';
+import { ParticleBackground } from '../../components/ParticleBackground';
 
 const { width } = Dimensions.get('window');
 
@@ -60,21 +61,21 @@ const Widget = ({ icon, title, value, color, trend }) => (
   <View style={styles.widget}>
     <View style={styles.widgetContent}>
       <View style={[styles.widgetBorder, { borderColor: color }]} />
-      
       <View style={styles.widgetHeader}>
-        <View style={[styles.iconContainer, { backgroundColor: color + '20' }]}>
+        <View style={[styles.iconContainer, { backgroundColor: `${color}20` }]}>
           <Text style={styles.iconText}>{icon}</Text>
         </View>
-        {trend !== undefined && (
-          <View style={[styles.trendBadge, trend >= 0 ? styles.trendUp : styles.trendDown]}>
-            <Text style={styles.trendIcon}>{trend >= 0 ? '↗' : '↘'}</Text>
-            <Text style={[styles.trendText, trend >= 0 ? styles.trendUpText : styles.trendDownText]}>
+        {trend && (
+          <View style={[styles.trendBadge, trend > 0 ? styles.trendUp : styles.trendDown]}>
+            <Text style={[styles.trendIcon, trend > 0 ? styles.trendUpText : styles.trendDownText]}>
+              {trend > 0 ? '↗' : '↘'}
+            </Text>
+            <Text style={[styles.trendText, trend > 0 ? styles.trendUpText : styles.trendDownText]}>
               {Math.abs(trend)}%
             </Text>
           </View>
         )}
       </View>
-
       <Text style={styles.widgetTitle}>{title}</Text>
       <View style={styles.widgetValueContainer}>
         <Text style={styles.widgetValue}>{value}</Text>
@@ -86,17 +87,27 @@ const Widget = ({ icon, title, value, color, trend }) => (
 // Composant BankCard
 const BankCard = ({ type, last4, holder, expiry, balance, index }) => {
   const getCardGradient = () => {
-    return type === 'visa' ? '#0F0F0F' : '#1A0000';
+    const gradients = [
+      ['#2D2D2D', '#1A1A1A'],
+      ['#1A1A1A', '#0D0D0D'],
+      ['#2D2D2D', '#1A1A1A'],
+      ['#1A1A1A', '#0D0D0D'],
+      ['#2D2D2D', '#1A1A1A'],
+    ];
+    return gradients[index % gradients.length];
   };
 
   return (
-    <View style={[styles.cardWrapper, { marginLeft: index === 0 ? 20 : 10 }]}>
-      <View style={[styles.card, { backgroundColor: getCardGradient() }]}>
-        {/* Header avec logo */}
+    <View style={styles.cardWrapper}>
+      <View style={[styles.card, { backgroundColor: getCardGradient()[0] }]}>
+        <View style={styles.decorativeLine} />
+        <View style={[styles.decorativeLine, styles.decorativeLineBottom]} />
+        
         <View style={styles.cardHeader}>
           <View style={styles.chipContainer}>
             <View style={styles.chip}>
               <View style={styles.chipPattern}>
+                <View style={styles.chipLine} />
                 <View style={styles.chipLine} />
                 <View style={styles.chipLine} />
               </View>
@@ -105,7 +116,6 @@ const BankCard = ({ type, last4, holder, expiry, balance, index }) => {
           <Text style={styles.cardType}>{type.toUpperCase()}</Text>
         </View>
 
-        {/* Numéro de carte */}
         <View style={styles.cardNumberContainer}>
           <Text style={styles.cardNumber}>••••</Text>
           <Text style={styles.cardNumber}>••••</Text>
@@ -113,7 +123,6 @@ const BankCard = ({ type, last4, holder, expiry, balance, index }) => {
           <Text style={[styles.cardNumber, styles.cardNumberLast]}>{last4}</Text>
         </View>
 
-        {/* Footer avec infos */}
         <View style={styles.cardFooter}>
           <View style={styles.cardInfo}>
             <Text style={styles.cardLabel}>CARD HOLDER</Text>
@@ -125,23 +134,14 @@ const BankCard = ({ type, last4, holder, expiry, balance, index }) => {
           </View>
         </View>
 
-        {/* Balance en position absolue */}
         <View style={styles.balanceContainer}>
           <Text style={styles.balanceLabel}>BALANCE</Text>
           <View style={styles.balanceValueContainer}>
-            <Text style={styles.cardBalance}>
-              ${balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-            </Text>
+            <Text style={styles.cardBalance}>${balance.toFixed(2)}</Text>
           </View>
         </View>
-
-        {/* Lignes décoratives dorées */}
-        <View style={styles.decorativeLine} />
-        <View style={[styles.decorativeLine, styles.decorativeLineBottom]} />
-        
-        {/* Shadow effet */}
-        <View style={styles.cardShadow} />
       </View>
+      <View style={styles.cardShadow} />
     </View>
   );
 };
@@ -158,22 +158,7 @@ export default function Dashboard() {
   return (
     <View style={styles.container}>
       {/* Background avec particules */}
-      <View style={styles.backgroundContainer}>
-        <View style={styles.gradientBackground}>
-          {[...Array(20)].map((_, i) => (
-            <View
-              key={i}
-              style={[
-                styles.particle,
-                {
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 5}s`,
-                },
-              ]}
-            />
-          ))}
-        </View>
-      </View>
+      <ParticleBackground />
 
       <ScrollView 
         style={styles.scrollView} 
@@ -183,9 +168,9 @@ export default function Dashboard() {
         {/* Header */}
         <View style={styles.header}>
           <View>
-            <Text style={styles.greeting}>Good Morning</Text>
+            <Text style={styles.greeting}>WELCOME BACK</Text>
             <View style={styles.userNameContainer}>
-              <Text style={styles.userName}>John Doe</Text>
+              <Text style={styles.userName}>John</Text>
             </View>
           </View>
           <TouchableOpacity style={styles.notificationButton}>
@@ -202,70 +187,62 @@ export default function Dashboard() {
         <View style={styles.balanceCardContainer}>
           <View style={styles.balanceCard}>
             <View style={styles.balanceCardBorder} />
-
-            <Text style={styles.balanceLabel}>TOTAL PORTFOLIO VALUE</Text>
-            
-            <View style={styles.balanceAmountContainer}>
-              <Text style={styles.balanceAmount}>
-                ${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-              </Text>
-            </View>
-
-            <View style={styles.balanceChangeContainer}>
-              <Text style={styles.changeIcon}>↗</Text>
-              <Text style={styles.balanceChange}>+2.5% from last month</Text>
-            </View>
-
-            {/* Pattern décoratif */}
             <View style={styles.patternContainer}>
-              {[...Array(3)].map((_, i) => (
-                <View 
-                  key={i} 
+              {[...Array(8)].map((_, i) => (
+                <View
+                  key={i}
                   style={[
-                    styles.patternLine, 
-                    { 
-                      left: `${25 + i * 25}%`, 
-                      opacity: 0.1 - i * 0.02,
-                      backgroundColor: '#FFD700'
-                    }
-                  ]} 
+                    styles.patternLine,
+                    {
+                      left: `${(i + 1) * 12}%`,
+                      backgroundColor: 'rgba(255, 215, 0, 0.05)',
+                    },
+                  ]}
                 />
               ))}
+            </View>
+            <Text style={styles.balanceLabel}>TOTAL BALANCE</Text>
+            <View style={styles.balanceAmountContainer}>
+              <Text style={styles.balanceAmount}>${totalBalance.toFixed(2)}</Text>
+            </View>
+            <View style={styles.balanceChangeContainer}>
+              <Text style={styles.changeIcon}>↗</Text>
+              <Text style={styles.balanceChange}>+12.5% from last month</Text>
             </View>
           </View>
         </View>
 
-        {/* Widgets Grid */}
+        {/* Widgets */}
         <View style={styles.widgetsContainer}>
-          <Widget 
+          <Widget
             icon="💰"
-            title="Total Expenses" 
-            value="$2,847" 
-            color="#FFD700" 
-            trend={-5.2}
+            title="INCOME"
+            value="$8,420"
+            color="#00C853"
+            trend={15.2}
           />
-          <Widget 
-            icon="📈"
-            title="Monthly Income" 
-            value="$8,240" 
-            color="#00C853" 
-            trend={12.5}
+          <Widget
+            icon="💸"
+            title="EXPENSES"
+            value="$3,240"
+            color="#FF3B30"
+            trend={-8.1}
           />
-          <Widget 
-            icon="🎯"
-            title="Savings Goal" 
-            value="85%" 
-            color="#2196F3" 
-            trend={8.3}
+          <Widget
+            icon="📊"
+            title="SAVINGS"
+            value="$5,180"
+            color="#FFD700"
+            trend={23.5}
           />
         </View>
 
-        {/* Bank Cards Section */}
+        {/* Cards Section */}
         <View style={styles.cardsSection}>
           <View style={styles.sectionHeader}>
             <View>
               <View style={styles.sectionTitleContainer}>
-                <Text style={styles.sectionTitle}>My Wallets</Text>
+                <Text style={styles.sectionTitle}>My Cards</Text>
               </View>
               <View style={styles.sectionUnderline} />
             </View>
@@ -278,10 +255,11 @@ export default function Dashboard() {
           </View>
 
           <FlatList
-            horizontal
             data={cards}
-            keyExtractor={(item) => item.id}
+            horizontal
             showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.cardsListContent}
+            keyExtractor={(item) => item.id}
             renderItem={({ item, index }) => (
               <BankCard
                 type={item.type}
@@ -292,7 +270,6 @@ export default function Dashboard() {
                 index={index}
               />
             )}
-            contentContainerStyle={styles.cardsListContent}
           />
         </View>
 
@@ -301,10 +278,9 @@ export default function Dashboard() {
           <View style={styles.quickActionsTitleContainer}>
             <Text style={styles.quickActionsTitle}>QUICK ACTIONS</Text>
           </View>
-
           <View style={styles.quickActionsGrid}>
-            {['Transfer', 'Deposit', 'Withdraw', 'Analytics'].map((action, index) => (
-              <TouchableOpacity key={action} style={styles.quickActionButton}>
+            {['Transfer', 'Pay Bills', 'Top Up', 'More'].map((action, index) => (
+              <TouchableOpacity key={index} style={styles.quickActionButton}>
                 <View style={styles.quickActionContent}>
                   <Text style={styles.quickActionText}>{action}</Text>
                 </View>
@@ -321,25 +297,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1A1A1A',
-  },
-  backgroundContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  gradientBackground: {
-    flex: 1,
-    backgroundColor: '#1A1A1A',
-  },
-  particle: {
-    position: 'absolute',
-    width: 3,
-    height: 3,
-    borderRadius: 1.5,
-    backgroundColor: '#FFD700',
-    opacity: 0.5,
   },
   scrollView: {
     flex: 1,
@@ -624,6 +581,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   cardsListContent: {
+    paddingLeft: 24,
     paddingRight: 20,
   },
   cardWrapper: {
@@ -719,13 +677,6 @@ const styles = StyleSheet.create({
     top: 24,
     right: 24,
     alignItems: 'flex-end',
-  },
-  balanceLabel: {
-    fontSize: 9,
-    color: '#808080',
-    letterSpacing: 1,
-    fontWeight: '600',
-    marginBottom: 4,
   },
   balanceValueContainer: {
     backgroundColor: '#FFD700',

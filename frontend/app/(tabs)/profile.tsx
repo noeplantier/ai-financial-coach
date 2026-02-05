@@ -5,31 +5,15 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Animated,
 } from 'react-native';
+import { ParticleBackground } from '../../components/ParticleBackground';
 
 export default function Profile() {
   return (
     <View style={styles.container}>
-      {/* Animated Background with particles */}
-      <View style={styles.backgroundContainer}>
-        <View style={styles.gradientBackground}>
-          {/* Particules dorées animées */}
-          {[...Array(15)].map((_, i) => (
-            <View
-              key={i}
-              style={[
-                styles.particle,
-                {
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                },
-              ]}
-            />
-          ))}
-        </View>
-      </View>
-
+      {/* Background avec particules */}
+      <ParticleBackground />
+      
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Header avec Avatar */}
         <View style={styles.header}>
@@ -318,25 +302,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#1A1A1A',
-  },
-  backgroundContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-  gradientBackground: {
-    flex: 1,
-    backgroundColor: '#1A1A1A',
-  },
-  particle: {
-    position: 'absolute',
-    width: 2.5,
-    height: 2.5,
-    borderRadius: 1.25,
-    backgroundColor: '#FFD700',
-    opacity: 0.5,
   },
   scrollView: {
     flex: 1,
