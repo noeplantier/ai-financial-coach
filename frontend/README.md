@@ -1,50 +1,137 @@
-# Welcome to your Expo app 👋
+# Financial AI Coach - Dashboard Premium
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 🎨 Design Features
 
-## Get started
+### ✨ Caractéristiques principales
+- **Background animé** avec particules dorées flottantes
+- **Cartes bancaires 3D** avec effet de rotation au survol
+- **Thème luxueux** : textures or sur gradient gris foncé
+- **Header réutilisable** optimisé pour toutes les features
+- **Animations fluides** avec Moti et gradients
 
-1. Install dependencies
+## 📦 Dépendances requises
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Installez les dépendances suivantes dans votre projet Expo :
 
 ```bash
-npm run reset-project
+npx expo install expo-linear-gradient
+npm install moti
+npm install lucide-react-native
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## 🚀 Installation
 
-## Learn more
+1. Copiez les fichiers suivants dans votre projet :
+   - `Dashboard.tsx` - Le dashboard principal
+   - `Header.tsx` - Header réutilisable
+   - `AnimatedBackground.tsx` - Background avec particules
+   - `BankCard3D.tsx` - Composant de carte 3D
 
-To learn more about developing your project with Expo, look at the following resources:
+2. Structure recommandée :
+```
+src/
+├── components/
+│   ├── Header.tsx
+│   ├── AnimatedBackground.tsx
+│   └── BankCard3D.tsx
+└── screens/
+    └── Dashboard.tsx
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🎯 Utilisation du Header
 
-## Join the community
+Le Header est un composant réutilisable que vous pouvez utiliser dans toutes vos screens :
 
-Join our community of developers creating universal apps.
+```tsx
+import { Header } from './components/Header';
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+<Header
+  userName="John Doe"
+  notificationCount={3}
+  onNotificationPress={() => {
+    // Votre logique de navigation
+    navigation.navigate('Notifications');
+  }}
+/>
+```
+
+### Props du Header
+- `greeting?: string` - Message de bienvenue (auto-détecté selon l'heure)
+- `userName: string` - Nom de l'utilisateur
+- `notificationCount?: number` - Nombre de notifications
+- `onNotificationPress?: () => void` - Callback au clic sur les notifications
+
+## 🎨 Palette de couleurs
+
+### Or / Gold
+- Primary: `#FFD700`
+- Secondary: `#FFA500`
+- Accent: `#FF8C00`
+
+### Gris foncé
+- Background: `#1A1A1A`
+- Secondary: `#2D2D2D`
+- Overlay: `#0A0A0A`
+
+### Accents
+- Success: `#00C853`
+- Error: `#FF3B30`
+- Info: `#2196F3`
+
+## 🔧 Personnalisation
+
+### Modifier les particules
+Dans `AnimatedBackground.tsx`, ajustez :
+- `length: 20` - Nombre de particules
+- `duration: 8000` - Vitesse d'animation
+- `width: 3, height: 3` - Taille des particules
+
+### Modifier les cartes 3D
+Dans `BankCard3D.tsx`, personnalisez :
+- `rotateY: '10deg'` - Angle de rotation au hover
+- `translateY: -10` - Élévation au hover
+- `scale: 1.05` - Zoom au hover
+
+## 📱 Responsive
+
+Le dashboard s'adapte automatiquement à la taille de l'écran grâce à :
+- `Dimensions.get('window')` pour les largeurs dynamiques
+- Layout flexible avec `flex` et `gap`
+- Tailles de police proportionnelles
+
+## 🎭 Animations
+
+### Types d'animations utilisées
+1. **Moti** - Animations de composants React Native
+2. **LinearGradient** - Dégradés premium
+3. **Spring animations** - Mouvements naturels
+4. **Loop animations** - Effets de pulsation
+
+## 💡 Bonnes pratiques
+
+1. **Performance** : Les particules utilisent `loop: true` pour éviter de recréer les animations
+2. **Accessibility** : Tous les boutons ont des zones de touch appropriées (min 48x48)
+3. **Réutilisabilité** : Header et composants séparés pour faciliter la maintenance
+4. **TypeScript** : Interfaces définies pour type safety
+
+## 🐛 Troubleshooting
+
+### Les animations ne fonctionnent pas
+- Vérifiez que `moti` est bien installé
+- Redémarrez Metro bundler avec `npx expo start -c`
+
+### Les gradients n'apparaissent pas
+- Assurez-vous que `expo-linear-gradient` est installé
+- Sur iOS, rebuild avec `npx expo run:ios`
+
+### Erreur "Chip is not defined"
+- Importez `lucide-react-native` correctement
+- Vérifiez la version : `npm list lucide-react-native`
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+## 🤝 Contribution
+
+N'hésitez pas à créer des issues ou des pull requests pour améliorer le projet !

@@ -7,6 +7,7 @@ import { Colors } from '../../constants/Colors';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Send, Sparkles } from 'lucide-react-native';
 
+
 export default function Coach() {
   const insets = useSafeAreaInsets();
   const [query, setQuery] = useState('');

@@ -19,7 +19,7 @@ export default function Transactions() {
 
   const fetchTransactions = async () => {
     try {
-      const res = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL || 'http://localhost:8001'}/api/transactions/`);
+      const res = await fetch(`${process.env.EXPO_PUBLIC_BACKEND_URL}/api/transactions/`);
       const data = await res.json();
       setTransactions(data);
     } catch (e) {
