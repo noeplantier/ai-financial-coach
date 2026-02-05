@@ -197,4 +197,10 @@ async def get_analytics(user_id: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8001, reload=True)
+    uvicorn.run(
+        "server:app",
+        host="0.0.0.0",
+        port=5000,
+        reload=True,
+        log_level="info"
+    )

@@ -1,40 +1,38 @@
 {
-    "expo": {
-      "name": "Financial AI Coach",
-      "slug": "financial-ai-coach",
-      "version": "1.0.0",
-      "orientation": "portrait",
-      "icon": "./assets/images/icon.png",
-      "scheme": "financialcoach",
-      "userInterfaceStyle": "automatic",
-      "splash": {
-        "image": "./assets/images/splash.png",
-        "resizeMode": "contain",
-        "backgroundColor": "#0f0f1e"
+  "expo": {
+    "name": "financial-ai-coach",
+    "slug": "financial-ai-coach",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.financialcoach.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
       },
-      "assetBundlePatterns": [
-        "**/*"
-      ],
-      "ios": {
-        "supportsTablet": true,
-        "bundleIdentifier": "com.financialcoach.app"
-      },
-      "android": {
-        "adaptiveIcon": {
-          "foregroundImage": "./assets/images/adaptive-icon.png",
-          "backgroundColor": "#0f0f1e"
-        },
-        "package": "com.financialcoach.app"
-      },
-      "web": {
-        "favicon": "./assets/images/favicon.png",
-        "bundler": "metro"
-      },
-      "plugins": [
-        "expo-router"
-      ],
-      "experiments": {
-        "typedRoutes": true
-      }
+      "package": "com.financialcoach.app"
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
+}

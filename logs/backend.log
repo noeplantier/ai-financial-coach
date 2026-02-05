@@ -1,0 +1,16 @@
+/Users/noeplantier/ai-financial-coach-2/backend/server.py:58: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+/Users/noeplantier/ai-financial-coach-2/backend/server.py:67: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+INFO:     Will watch for changes in these directories: ['/Users/noeplantier/ai-financial-coach-2/backend']
+ERROR:    [Errno 48] Address already in use

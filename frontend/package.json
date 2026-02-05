@@ -3,44 +3,56 @@
     "version": "1.0.0",
     "main": "expo-router/entry",
     "scripts": {
-      "start": "expo start",
-      "android": "expo start --android",
-      "ios": "expo start --ios",
-      "web": "expo start --web",
-      "reset": "rm -rf node_modules package-lock.json .expo && npm install --legacy-peer-deps"
+        "start": "expo start",
+        "android": "expo start --android",
+        "ios": "expo start --ios",
+        "web": "expo start --web",
+        "reset": "rm -rf node_modules package-lock.json .expo && npm install --legacy-peer-deps"
     },
     "dependencies": {
-      "expo": "~50.0.0",
-      "expo-router": "~3.4.0",
-      "react": "18.2.0",
-      "react-native": "0.73.0",
-      "react-native-web": "~0.19.6",
-      "react-dom": "18.2.0",
-      "react-native-safe-area-context": "4.8.2",
-      "react-native-screens": "~3.29.0",
-      "@clerk/clerk-expo": "^0.19.0",
-      "expo-secure-store": "~12.8.0",
-      "@react-native-async-storage/async-storage": "1.21.0",
-      "react-native-gesture-handler": "~2.14.0",
-      "react-native-reanimated": "~3.6.0",
-      "expo-linear-gradient": "~12.7.0",
-      "react-native-svg": "14.1.0",
-      "axios": "^1.6.0",
-      "@react-navigation/native": "^6.1.0",
-      "expo-status-bar": "~1.11.1",
-      "expo-linking": "~6.2.2",
-      "expo-constants": "~15.4.5",
-      "expo-splash-screen": "~0.26.4",
-      "lucide-react-native": "^0.344.0",
-      "es-abstract": "^1.22.3"
+        "@clerk/clerk-expo": "^0.19.0",
+        "@motify/components": "^0.18.0",
+        "@motify/core": "^0.18.0",
+        "@react-native-async-storage/async-storage": "1.21.0",
+        "@react-native-masked-view/masked-view": "0.3.0",
+        "@react-navigation/native": "^6.1.0",
+        "axios": "^1.6.0",
+        "es-abstract": "^1.22.3",
+        "expo": "~50.0.0",
+        "expo-auth-session": "~5.4.0",
+        "expo-constants": "~15.4.5",
+        "expo-linear-gradient": "~12.7.0",
+        "expo-linking": "~6.2.2",
+        "expo-router": "~3.4.0",
+        "expo-secure-store": "~12.8.0",
+        "expo-splash-screen": "~0.26.4",
+        "expo-status-bar": "~1.11.1",
+        "expo-web-browser": "~12.8.2",
+        "lucide-react-native": "^0.344.0",
+        "moti": "^0.30.0",
+        "react": "18.2.0",
+        "react-dom": "18.2.0",
+        "react-native": "0.73.6",
+        "react-native-gesture-handler": "~2.14.0",
+        "react-native-reanimated": "~3.6.0",
+        "react-native-safe-area-context": "4.8.2",
+        "react-native-screens": "~3.29.0",
+        "react-native-svg": "14.1.0",
+        "react-native-web": "~0.19.6"
     },
     "devDependencies": {
-      "@babel/core": "^7.20.0",
-      "@types/react": "~18.2.45",
-      "typescript": "^5.1.3"
+        "@babel/core": "^7.20.0",
+        "@types/react": "~18.2.45",
+        "typescript": "^5.1.3"
+    },
+    "overrides": {
+        "@expo/image-utils": {
+            "jimp-compact": "^0.16.1"
+        }
     },
     "resolutions": {
-      "es-abstract": "^1.22.3"
+        "es-abstract": "^1.22.3",
+        "@expo/image-utils/jimp-compact": "^0.16.1"
     },
     "private": true
-  }
+}
